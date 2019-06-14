@@ -7,9 +7,9 @@ const mongoose = require("mongoose");
 const express = require("express");
 const router = express.Router();
 
-router.post("/", async (req, res) => {
+router.post("/registration", async (req, res) => {
   const { error } = validate(req.body);
-  if ({ error }) return res.status(400).send(error.details[0].message);
+  if (error) return res.status(400).send(error.details[0].message);
 
   let user = await User.findOne({ email: req.body.email });
   if (user) return res.status(400).send("User Already Exists");
@@ -23,6 +23,21 @@ router.post("/", async (req, res) => {
   res
     .header("auth-token", token)
     .send(_.pick(user, ["name", "email", "mobile"]));
+});
+
+router.post("/login", async (req, res) => {
+
+  let user = await User.findOne({ email: req.body.email });
+  if(!user) return res.status(400).send("Wrong ID or Password");
+
+  const result = await bcrypt.compare(req.body.password, user.password);
+  if(!result) return res.status(400).send("Wrong ID or Password");
+
+  const token = jwt.sign({ _id: user._id }, config.get("jwtPrivateKey"));
+
+  res
+    .header("auth-token", token)
+    .send("Login Done");
 });
 
 module.exports = router;
