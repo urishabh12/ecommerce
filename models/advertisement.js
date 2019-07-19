@@ -1,18 +1,14 @@
 const Joi = require("joi");
 const mongoose = require("mongoose");
 
-const catSchema = new mongoose.Schema({
-  name: {
-    type: String,
-    required: true
-  },
-  description: {
+const advertisementSchema = new mongoose.Schema({
+  image: {
     type: String
   },
-  company: {
+  product: {
     type: Array
   },
-  image: {
+  title: {
     type: String
   },
   isDelete: {
@@ -21,4 +17,4 @@ const catSchema = new mongoose.Schema({
   }
 });
 
-module.exports = mongoose.model("Category", catSchema);
+module.exports = mongoose.model("Advertisement", advertisementSchema);

@@ -42,7 +42,7 @@ const userSchema = new mongoose.Schema({
     maxlength: 20
   },
   documentLink: {
-    type: String
+    type: Object
   },
   profileLink: {
     type: String
@@ -76,11 +76,7 @@ function validateUser(user) {
       .min(5)
       .max(50)
       .required()
-      .email(),
-    password: Joi.string()
-      .min(8)
-      .max(255)
-      .required()
+      .email()
   };
 
   return Joi.validate(user, schema);

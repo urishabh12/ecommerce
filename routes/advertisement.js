@@ -1,8 +1,8 @@
 const jwt = require("jsonwebtoken");
 const config = require("config");
-const _ = require("lodash");
 const multer = require("multer");
-const Category = require("../models/category");
+const _ = require("lodash");
+const Advertisement = require("../models/advertisement");
 const mongoose = require("mongoose");
 const express = require("express");
 const router = express.Router();
@@ -13,7 +13,7 @@ var Storage = multer.diskStorage({
   },
 
   filename: function(req, file, callback) {
-    callback(null, req.body.name);
+    callback(null, req.body.title);
   }
 });
 
@@ -22,18 +22,25 @@ var upload = multer({
 });
 
 router.post("/add", upload.single("image", 1), async (req, res) => {
-  const category = new Category(
-    _.pick(req.body, ["name", "description", "company"])
-  );
-  category.image = req.body.name;
-  await category.save();
+  let result = await Advertisement.find({
+    title: req.body.title,
+    isDelete: false
+  });
+  if (!result.length) return res.send("Advertisement already exists");
 
-  res.send("Saved");
+  const advertisement = new Advertisement(
+    _.pick(req.body, ["title", "product"])
+  );
+  advertisement.image = req.body.title;
+  await advertisement.save();
+
+  return res.send(advertisement);
 });
 
-router.get("/", async (req, res) => {
-  const result = await Category.find({ isDelete: false });
-  res.send(result);
+router.get("/get", async (req, res) => {
+  let result = await Advertisement.find({ isDelete: false });
+
+  return res.send(result);
 });
 
 router.post("/delete", async (req, res) => {
