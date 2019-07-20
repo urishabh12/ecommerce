@@ -40,8 +40,8 @@ router.post("/add", upload.single("image", 1), async (req, res) => {
 
 router.get("/", async (req, res) => {
   let result = await Product.find({
-    category: req.body.category,
-    company: req.body.company
+    category: req.body.category
+    //company: req.body.company
   });
   if (!result.length) res.status(404).send("No products to show");
 

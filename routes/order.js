@@ -20,7 +20,7 @@ router.post("/add", async (req, res) => {
   return res.send(order);
 });
 
-router.post("/", async (req, res) => {
+router.get("/", async (req, res) => {
   const id = jwt.decode(req.get("auth-token"), config.get("jwtPrivateKey"));
   const result = Order.find({ user: id });
 

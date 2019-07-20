@@ -37,10 +37,15 @@ router.post("/registration", cpUpload, async (req, res) => {
   if (user) return res.status(400).send("User Already Exists");
 
   let docs = {
-    aadhar: req.body.email + "_" + "aadhar",
-    electricity: req.body.email + "_" + "electricity",
-    pan: req.body.email + "_" + "pan",
-    driving: req.body.email + "_" + "driving"
+    profile: req.body.email + "_" + "profile",
+    aadhar0: req.body.email + "_" + "aadhar0",
+    electricity0: req.body.email + "_" + "electricity0",
+    pan0: req.body.email + "_" + "pan0",
+    driving0: req.body.email + "_" + "driving0",
+    aadhar1: req.body.email + "_" + "aadhar1",
+    electricity1: req.body.email + "_" + "electricity1",
+    pan1: req.body.email + "_" + "pan1",
+    driving1: req.body.email + "_" + "driving1"
   };
 
   user = new User(_.pick(req.body, ["name", "mobile", "email", "password"]));
