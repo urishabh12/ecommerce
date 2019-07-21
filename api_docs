@@ -1,5 +1,5 @@
 POST localhost:3000/api/users/registration
-inputs: name, email, mobile, password, aadhar0, aadhar1, pan0, pan1, driving0, driving1, electricity0, electricity1
+inputs: name, email, mobile, password, aadhar0, aadhar1, pan0, pan1, driving0, driving1, electricity0, electricity1, profile
 
 POST localhost:3000/api/users/login
 inputs: email, password output: auth-token (header)
