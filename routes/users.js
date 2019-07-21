@@ -23,10 +23,15 @@ var upload = multer({
 });
 
 var cpUpload = upload.fields([
-  { name: "aadhar", maxCount: 1 },
-  { name: "electricity", maxCount: 1 },
-  { name: "pan", maxCount: 1 },
-  { name: "driving", maxCount: 1 }
+  { name: "aadhar0", maxCount: 1 },
+  { name: "electricity0", maxCount: 1 },
+  { name: "pan0", maxCount: 1 },
+  { name: "driving0", maxCount: 1 },
+  { name: "aadhar1", maxCount: 1 },
+  { name: "electricity1", maxCount: 1 },
+  { name: "pan1", maxCount: 1 },
+  { name: "driving1", maxCount: 1 },
+  { name: "profile", maxCount: 1 }
 ]);
 
 router.post("/registration", cpUpload, async (req, res) => {
