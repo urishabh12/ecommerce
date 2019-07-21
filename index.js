@@ -36,8 +36,8 @@ app.use("/api/advertisement", advertisement);
 app.use("/api/cart", cart);
 app.use("/api/wishlist", wishlist);
 
-app.get("/", (req, res) => {
-  res.sendFile(__dirname + "/Images/kvt@linux.com_aadhar");
+app.get("/getimage", (req, res) => {
+  res.sendFile(__dirname + "/Images/" + req.body.image);
 });
 
 const port = process.env.PORT || 3000;

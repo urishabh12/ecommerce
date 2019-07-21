@@ -1,0 +1,57 @@
+POST localhost:3000/api/users/registration
+inputs: name, email, mobile, password, aadhar0, aadhar1, pan0, pan1, driving0, driving1, electricity0, electricity1
+
+POST localhost:3000/api/users/login
+inputs: email, password output: auth-token (header)
+
+POST localhost:3000/api/users/flogin
+inputs: email outpus: auth-token (header)
+
+POST localhost:3000/api/wishlist/add
+inputs: auth-token (header), products (product _id)
+
+GET localhost:3000/api/wishlist/get
+inputs: auth-token
+
+POST localhost:3000/api/cart/add
+inputs: auth-token (header), products (product _id)
+
+GET localhost:3000/api/cart/get
+inputs: auth-token
+
+POST localhost:3000/api/product/add
+inputs: name, category, company, quantity, price
+
+GET localhost:3000/api/product/
+inputs: category (category_name)
+
+POST localhost:3000/api/order/add
+inputs: auth-token (header) , product (complete)
+
+GET localhost:3000/api/order/
+inputs: auth-token (header)
+
+POST localhost:3000/api/order/complete
+inputs: id (order _id)
+
+POST localhost:3000/api/advertisement/add
+inputs: title, product, image
+
+POST localhost:3000/api/advertisement/delete
+inputs: id (_id)
+
+GET localhost:3000/api/advertisement/get
+outputs: Advertisement
+
+POST localhost:3000/api/category/add
+inputs: name, description, company, image
+
+GET localhost:3000/api/category/
+outputs: Category
+
+POST localhost:3000/api/category/delete
+inputs: id (_id)
+
+POST localhost:3000/getimage
+inputs: image (image_name)
+
