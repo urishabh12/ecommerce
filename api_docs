@@ -52,6 +52,6 @@ outputs: Category
 POST localhost:3000/api/category/delete
 inputs: id (_id)
 
-POST localhost:3000/getimage
-inputs: image (image_name)
+POST localhost:3000/getimage/:image
+inputs: params image (image_name)
 

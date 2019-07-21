@@ -36,8 +36,8 @@ app.use("/api/advertisement", advertisement);
 app.use("/api/cart", cart);
 app.use("/api/wishlist", wishlist);
 
-app.get("/getimage", (req, res) => {
-  res.sendFile(__dirname + "/Images/" + req.body.image);
+app.get("/getimage/:image", (req, res) => {
+  res.sendFile(__dirname + "/Images/" + req.params.image);
 });
 
 const port = process.env.PORT || 3000;
