@@ -35,7 +35,7 @@ router.post("/add", upload.single("image", 1), async (req, res) => {
   product.image = req.body.name;
   await product.save();
 
-  res.send(product);
+  res.status(200).send(product);
 });
 
 router.get("/", async (req, res) => {
@@ -45,7 +45,7 @@ router.get("/", async (req, res) => {
   });
   if (!result.length) res.status(404).send("No products to show");
 
-  res.send(result);
+  res.status(200).send(result);
 });
 
 module.exports = router;

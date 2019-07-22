@@ -62,6 +62,7 @@ router.post("/registration", cpUpload, async (req, res) => {
   const token = jwt.sign({ _id: user._id }, config.get("jwtPrivateKey"));
 
   res
+    .status(200)
     .header("auth-token", token)
     .send(_.pick(user, ["name", "email", "mobile"]));
 });
@@ -75,7 +76,10 @@ router.post("/login", async (req, res) => {
 
   const token = jwt.sign({ _id: user._id }, config.get("jwtPrivateKey"));
 
-  res.header("auth-token", token).send("Login Done");
+  res
+    .status(200)
+    .header("auth-token", token)
+    .send("Login Done");
 });
 
 router.post("/flogin", async (req, res) => {

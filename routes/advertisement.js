@@ -34,13 +34,13 @@ router.post("/add", upload.single("image", 1), async (req, res) => {
   advertisement.image = req.body.title;
   await advertisement.save();
 
-  return res.send(advertisement);
+  return res.status(200).send(advertisement);
 });
 
 router.get("/get", async (req, res) => {
   let result = await Advertisement.find({ isDelete: false });
 
-  return res.send(result);
+  return res.status(200).send(result);
 });
 
 router.post("/delete", async (req, res) => {

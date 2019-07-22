@@ -14,12 +14,12 @@ router.post("/add", async (req, res) => {
     const cart = await new Cart(_.pick(req.body, ["products"]));
     cart.user = id;
     await cart.save();
-    return res.send("Done");
+    return res.status(200).send("Done");
   }
 
   result[0].products.find(ele => {
     if (ele === req.body.products) {
-      return res.send("Already in Cart");
+      return res.status(400).send("Already in Cart");
     }
   });
 
@@ -39,7 +39,7 @@ router.get("/get", async (req, res) => {
 
   let result = await Cart.find({ user: id });
 
-  return res.send(result.products);
+  return res.send(200).send(result.products);
 });
 
 module.exports = router;

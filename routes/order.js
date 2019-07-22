@@ -17,7 +17,7 @@ router.post("/add", async (req, res) => {
   const order = new Order(data);
   await order.save();
 
-  return res.send(order);
+  return res.status(200).send(order);
 });
 
 router.get("/", async (req, res) => {
@@ -26,7 +26,7 @@ router.get("/", async (req, res) => {
 
   if (!result.length) return res.send("No Orders");
 
-  res.send(result);
+  res.status(200).send(result);
 });
 
 router.post("/complete", async (req, res) => {

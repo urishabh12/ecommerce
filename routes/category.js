@@ -28,12 +28,12 @@ router.post("/add", upload.single("image", 1), async (req, res) => {
   category.image = req.body.name;
   await category.save();
 
-  res.send("Saved");
+  res.status(200).send("Saved");
 });
 
 router.get("/", async (req, res) => {
   const result = await Category.find({ isDelete: false });
-  res.send(result);
+  res.status(200).send(result);
 });
 
 router.post("/delete", async (req, res) => {
