@@ -37,6 +37,7 @@ app.use("/api/cart", cart);
 app.use("/api/wishlist", wishlist);
 
 app.get("/getimage/:image", (req, res) => {
+  res.contentType("image/png");
   res.status(200).sendFile(__dirname + "/Images/" + req.params.image);
 });
 
