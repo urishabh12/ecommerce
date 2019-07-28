@@ -38,11 +38,27 @@ router.post("/add", upload.single("image", 1), async (req, res) => {
   res.status(200).send(product);
 });
 
-router.get("/", async (req, res) => {
+router.get("/cat/:category", async (req, res) => {
   let result = await Product.find({
-    category: req.body.category
+    category: req.params.category
     //company: req.body.company
   });
+  if (!result.length) res.status(404).send("No products to show");
+
+  res.status(200).send(result);
+});
+
+router.get("/brand/:brand", async (req, res) => {
+  let result = await Product.find({
+    company: req.params.brand
+  });
+  if (!result.length) res.status(404).send("No products to show");
+
+  res.status(200).send(result);
+});
+
+router.get("/all", async (req, res) => {
+  let result = await Product.find({});
   if (!result.length) res.status(404).send("No products to show");
 
   res.status(200).send(result);

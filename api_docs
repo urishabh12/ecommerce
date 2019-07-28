@@ -22,8 +22,14 @@ inputs: auth-token
 POST localhost:3000/api/product/add
 inputs: name, category, company, quantity, price
 
-GET localhost:3000/api/product/
-inputs: category (category_name)
+GET localhost:3000/api/product/cat/:category
+inputs: params category (category_name)
+
+GET localhost:3000/api/product/brand/:brand
+inputs: params brand (brand_name)
+
+GET localhost:3000/api/product/all
+inputs: 
 
 POST localhost:3000/api/order/add
 inputs: auth-token (header) , product (complete)
@@ -51,6 +57,15 @@ outputs: Category
 
 POST localhost:3000/api/category/delete
 inputs: id (_id)
+
+POST localhost:3000/api/category/brand/add
+inputs: name
+
+POST localhost:3000/api/category/delbrand
+inputs: id: _id
+
+GET localhost:3000/api/category/brand
+inputs:
 
 POST localhost:3000/getimage/:image
 inputs: params image (image_name)
