@@ -26,7 +26,8 @@ router.post("/add", upload.single("image", 1), async (req, res) => {
     title: req.body.title,
     isDelete: false
   });
-  if (!result.length) return res.send("Advertisement already exists");
+
+  if (result.length) return res.send("Advertisement already exists");
 
   const advertisement = new Advertisement(
     _.pick(req.body, ["title", "product"])
