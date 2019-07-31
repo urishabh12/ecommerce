@@ -1,4 +1,5 @@
 const config = require("config");
+const { User, validate } = require("./models/users");
 const jwt = require("jsonwebtoken");
 const Joi = require("joi");
 var multer = require("multer");
@@ -39,6 +40,35 @@ app.use("/api/wishlist", wishlist);
 app.get("/getimage/:image", (req, res) => {
   res.contentType("image/png");
   res.status(200).sendFile(__dirname + "/Images/" + req.params.image);
+});
+
+app.get("/", (req, res) => {
+  res.sendFile(__dirname + "/html/index.html");
+});
+
+app.get("/js/:name", (req, res) => {
+  res.status(200).sendFile(__dirname + "/js/" + req.params.name);
+});
+
+app.get("/css/:name", (req, res) => {
+  res.status(200).sendFile(__dirname + "/css/" + req.params.name);
+});
+
+app.post("/check", async (req, res) => {
+  let id = jwt.decode(req.get("auth-token"), config.get("jwtPrivateKey"));
+  let temp = id._id;
+  const result = await User.find({ _id: temp });
+  if (result.length) {
+    res.status(200).send("SUCCESS");
+  }
+});
+
+app.get("/dashboard", (req, res) => {
+  res.sendFile(__dirname + "/html/dashboard.html");
+});
+
+app.get("/users", (req, res) => {
+  res.sendFile(__dirname + "/html/users.html");
 });
 
 const port = process.env.PORT || 2000;

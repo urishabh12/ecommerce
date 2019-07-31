@@ -7,6 +7,9 @@ const { User, validate } = require("../models/users");
 const mongoose = require("mongoose");
 const express = require("express");
 const router = express.Router();
+const path = require("path");
+
+let __parentDir = path.dirname(module.parent.filename);
 
 var Storage = multer.diskStorage({
   destination: function(req, file, callback) {
@@ -79,7 +82,7 @@ router.post("/login", async (req, res) => {
   res
     .status(200)
     .header("auth-token", token)
-    .send("Login Done");
+    .send({ message: "Success" });
 });
 
 router.post("/flogin", async (req, res) => {
@@ -90,6 +93,31 @@ router.post("/flogin", async (req, res) => {
   const token = jwt.sign({ _id: user._id }, config.get("jwtPrivateKey"));
 
   res.header("auth-token", token).send("Login Done");
+});
+
+router.get("/", async (req, res) => {
+  let result = await User.find();
+
+  return res.send(result);
+});
+
+router.get("/single/:id", async (req, res) => {
+  let result = await User.find({ _id: req.params.id });
+  if (Object.keys(req.query).length === 0) {
+    return res.status(200).sendFile(__parentDir + "/html/user_view.html");
+  }
+
+  return res.status(200).send(result);
+});
+
+router.post("/verify/:id", async (req, res) => {
+  const id = req.params.id;
+  const updateObj = { isVerified: true };
+
+  User.findByIdAndUpdate(id, updateObj, { new: true }, function(err, model) {
+    if (err) return res.status(500).send(err);
+    res.status(200).send(model);
+  });
 });
 
 module.exports = router;
