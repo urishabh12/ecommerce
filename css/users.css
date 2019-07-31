@@ -1,0 +1,9 @@
+.center_div {
+  margin-left: 20px;
+  margin-top: 10px;
+  width: 40%;
+}
+
+tr:hover {
+  color: white;
+}

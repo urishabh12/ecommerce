@@ -1,0 +1,18 @@
+.center_div {
+  margin: 0 auto;
+  margin-top: 15%;
+  width: 35%;
+  background-color: white;
+}
+
+.div_box {
+  border-style: solid;
+  border-width: 9px;
+  border-color: #729d90;
+  border-radius: 25px;
+}
+
+input[type="submit"] {
+  width: 5em;
+  margin-bottom: 20px;
+}
