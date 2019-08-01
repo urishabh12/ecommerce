@@ -9,7 +9,7 @@ const router = express.Router();
 router.post("/add", async (req, res) => {
   const id = jwt.decode(req.get("auth-token"), config.get("jwtPrivateKey"));
 
-  let result = await Wishlist.find({ user: id });
+  let result = await Wishlist.find({ user: id._id });
   if (!result.length) {
     const wish = await new Wishlist(_.pick(req.body, ["products"]));
     wish.user = id;
@@ -40,6 +40,12 @@ router.get("/get", async (req, res) => {
   let result = await Wishlist.find({ user: id });
 
   return res.status(200).send(result.products);
+});
+
+router.get("/all", async (req, res) => {
+  let result = await Wishlist.find({});
+
+  return res.status(200).send(result);
 });
 
 module.exports = router;

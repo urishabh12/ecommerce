@@ -3,6 +3,7 @@ const config = require("config");
 const multer = require("multer");
 const _ = require("lodash");
 const Advertisement = require("../models/advertisement");
+const { Product, productSchema } = require("../models/product");
 const mongoose = require("mongoose");
 const express = require("express");
 const router = express.Router();
@@ -42,6 +43,15 @@ router.get("/get", async (req, res) => {
   let result = await Advertisement.find({ isDelete: false });
 
   return res.status(200).send(result);
+});
+
+router.get("/web", async (req, res) => {
+  let result = await Advertisement.find({ isDelete: false });
+
+  let product = await Product.find({ isDelete: false });
+  result.push(product);
+
+  return res.status(200).send({ hi: "hello" });
 });
 
 router.post("/delete", async (req, res) => {

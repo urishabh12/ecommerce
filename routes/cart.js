@@ -42,4 +42,10 @@ router.get("/get", async (req, res) => {
   return res.send(200).send(result.products);
 });
 
+router.get("/all", async (req, res) => {
+  let result = await Cart.find({});
+
+  return res.send(200).send(result);
+});
+
 module.exports = router;

@@ -5,6 +5,7 @@ const multer = require("multer");
 const { Product, productSchema } = require("../models/product");
 const Category = require("../models/category");
 const mongoose = require("mongoose");
+const validateJwt = require("../middleware/check");
 const express = require("express");
 const router = express.Router();
 
@@ -23,19 +24,18 @@ var upload = multer({
 });
 
 router.post("/add", upload.single("image", 1), async (req, res) => {
-  let result = await Category.find({
-    name: req.body.category,
-    company: { $all: [req.body.company] }
-  });
-  if (!result.length) return res.status(500).send("Category or Company Error");
+  console.log(req.data);
+  if (await validateJwt(req.get("auth-token"))) {
+    const product = new Product(
+      _.pick(req.body, ["name", "category", "company", "quantity", "price"])
+    );
+    product.image = req.body.name;
+    await product.save();
 
-  const product = new Product(
-    _.pick(req.body, ["name", "category", "company", "quantity", "price"])
-  );
-  product.image = req.body.name;
-  await product.save();
+    return res.status(200).send("Added");
+  }
 
-  res.status(200).send(product);
+  return res.send("Error");
 });
 
 router.get("/cat/:category", async (req, res) => {
@@ -58,10 +58,15 @@ router.get("/brand/:brand", async (req, res) => {
 });
 
 router.get("/all", async (req, res) => {
-  let result = await Product.find({});
-  if (!result.length) res.status(404).send("No products to show");
+  if (await validateJwt(req.get("auth-token"))) {
+    let result = await Product.find({ isDelete: false });
+    let cat = await Category.find({ isDelete: false });
+    result.push(cat);
+    if (!result.length) return res.status(404).send("No products to show");
+    return res.send(result);
+  }
 
-  res.status(200).send(result);
+  return res.status(500).send({ message: "access denied" });
 });
 
 module.exports = router;

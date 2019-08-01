@@ -22,21 +22,26 @@ router.post("/add", async (req, res) => {
 
 router.get("/", async (req, res) => {
   const id = jwt.decode(req.get("auth-token"), config.get("jwtPrivateKey"));
-  const result = Order.find({ user: id });
+  const result = await Order.find({ user: id._id });
 
   if (!result.length) return res.send("No Orders");
 
   res.status(200).send(result);
 });
 
-router.post("/complete", async (req, res) => {
-  const id = req.body.id;
+router.get("/all", async (req, res) => {
+  const result = await Order.find({});
+
+  if (!result.length) return res.send("No Orders");
+
+  return res.status(200).send(result);
+});
+
+router.post("/complete/:id", async (req, res) => {
+  const id = req.params.id;
   const updateObj = { isComplete: true };
 
-  Category.findByIdAndUpdate(id, updateObj, { new: true }, function(
-    err,
-    model
-  ) {
+  Order.findByIdAndUpdate(id, updateObj, { new: true }, function(err, model) {
     if (err) return res.status(500).send(err);
     res.send(model);
   });

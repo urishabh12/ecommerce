@@ -13,10 +13,10 @@
       crossorigin="anonymous"
     />
     <link rel="stylesheet" href="http://localhost:2000/css/dashboard.css" />
-    <link rel="stylesheet" href="http://localhost:2000/css/users.css" />
+    <link rel="stylesheet" href="http://localhost:2000/css/order.css" />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
-    <script src="http://localhost:2000/js/users.js"></script>
+    <script src="http://localhost:2000/js/order.js"></script>
   </head>
   <body>
     <div class="sidenav">
@@ -25,27 +25,30 @@
       <a href="http://localhost:2000/users">
         <i class="fas fa-user "> Users</i></a
       >
-      <a href="http://localhost:2000/users">
+      <a href="http://localhost:2000/products">
         <i class="fas fa-folder "> Products</i></a
       >
-      <a href="http://localhost:2000/users">
+      <a href="http://localhost:2000/advertisement">
         <i class="fas fa-industry"> Advertisement</i></a
       >
-      <a href="http://localhost:2000/users">
+      <a href="http://localhost:2000/order">
         <i class="fas fa-list "> Order</i></a
       >
     </div>
 
     <div class="main">
+      <h4></h4>
       <div class="center_div">
-        <h1 style="margin-bottom: 10px;">User Table</h1>
+        <h1 style="margin-bottom: 10px;">Product Table</h1>
         <table id="data" class="table table-bordered">
           <thead>
             <tr>
-              <th>Name</th>
-              <th>Mobile</th>
-              <th>Email</th>
-              <th>View</th>
+              <th>User ID</th>
+              <th>Product</th>
+              <th>Quantity</th>
+              <th>Days</th>
+              <th>Time</th>
+              <th>Completed</th>
             </tr>
           </thead>
           <tbody></tbody>

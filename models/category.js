@@ -9,9 +9,6 @@ const catSchema = new mongoose.Schema({
   description: {
     type: String
   },
-  company: {
-    type: Array
-  },
   image: {
     type: String
   },

@@ -33,7 +33,7 @@ app.use("/api/users", users);
 app.use("/api/category", category);
 app.use("/api/product", product);
 app.use("/api/order", order);
-app.use("/api/advertisement", advertisement);
+app.use("/api/advert", advertisement);
 app.use("/api/cart", cart);
 app.use("/api/wishlist", wishlist);
 
@@ -69,6 +69,34 @@ app.get("/dashboard", (req, res) => {
 
 app.get("/users", (req, res) => {
   res.sendFile(__dirname + "/html/users.html");
+});
+
+app.get("/products", (req, res) => {
+  res.sendFile(__dirname + "/html/products.html");
+});
+
+app.get("/advertisement", (req, res) => {
+  res.sendFile(__dirname + "/html/advertisement.html");
+});
+
+app.get("/order", (req, res) => {
+  res.sendFile(__dirname + "/html/order.html");
+});
+
+app.get("/category", (req, res) => {
+  res.sendFile(__dirname + "/html/category.html");
+});
+
+app.get("/wishlist", (req, res) => {
+  res.sendFile(__dirname + "/html/wishlist.html");
+});
+
+app.get("/cart", (req, res) => {
+  res.sendFile(__dirname + "/html/cart.html");
+});
+
+app.get("/brand", (req, res) => {
+  res.sendFile(__dirname + "/html/brand.html");
 });
 
 const port = process.env.PORT || 2000;

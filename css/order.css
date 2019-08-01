@@ -1,0 +1,11 @@
+.center_div {
+  margin-left: 20px;
+  margin-top: 10px;
+  width: 40%;
+}
+
+button {
+  color: white;
+  background-color: black;
+  border: 2px solid black;
+}
