@@ -1,10 +1,11 @@
 const Joi = require("joi");
 const mongoose = require("mongoose");
-const { Product, productSchema } = require("../models/product");
 const Users = require("../models/users");
 
 const orderSchema = new mongoose.Schema({
-  product: productSchema,
+  product: {
+    type: mongoose.Schema.Types.ObjectId
+  },
   user: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "Users"

@@ -7,13 +7,23 @@ $(document).ready(function() {
 
   $.getJSON("http://localhost:2000/api/product/all", function(json) {
     var tr;
+    let link = "http://localhost:2000/getimage/";
     for (var i = 0; i < json.length - 1; i++) {
+      let link =
+        "window.open('" +
+        "http://localhost:2000/getimage/" +
+        json[i].image +
+        "'" +
+        "," +
+        "'_self'" +
+        ")";
       tr = $("<tr/>");
       tr.append("<td>" + json[i].name + "</td>");
       tr.append("<td>" + json[i].category + "</td>");
       tr.append("<td>" + json[i].company + "</td>");
       tr.append("<td>" + json[i].price + "</td>");
       tr.append("<td>" + json[i].quantity + "</td>");
+      tr.append("<td onclick=" + link + ">" + "View" + "</td>");
       $("table tbody").append(tr);
     }
     let cat = json[json.length - 1];

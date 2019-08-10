@@ -30,10 +30,15 @@ router.post("/add", upload.single("image", 1), async (req, res) => {
 
   if (result.length) return res.send("Advertisement already exists");
 
-  const advertisement = new Advertisement(
-    _.pick(req.body, ["title", "product"])
-  );
+  let temp = [];
+
+  for (var i = 0; i < req.body.product.length; i++) {
+    temp.push(JSON.parse(req.body.product[i]));
+  }
+
+  const advertisement = new Advertisement(_.pick(req.body, ["title"]));
   advertisement.image = req.body.title;
+  advertisement.product = temp;
   await advertisement.save();
 
   return res.status(200).send(advertisement);
@@ -51,19 +56,19 @@ router.get("/web", async (req, res) => {
   let product = await Product.find({ isDelete: false });
   result.push(product);
 
-  return res.status(200).send({ hi: "hello" });
+  return res.status(200).send(result);
 });
 
-router.post("/delete", async (req, res) => {
-  const id = req.body.id;
+router.post("/delete/:id", async (req, res) => {
+  const id = req.params.id;
   const updateObj = { isDelete: true };
 
-  Category.findByIdAndUpdate(id, updateObj, { new: true }, function(
+  Advertisement.findByIdAndUpdate(id, updateObj, { new: true }, function(
     err,
     model
   ) {
     if (err) return res.status(500).send(err);
-    res.send(model);
+    res.status(200).send(model);
   });
 });
 

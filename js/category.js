@@ -75,15 +75,17 @@ $(document).ready(function() {
   $("#categoryForm").submit(function(e) {
     e.preventDefault();
 
-    var form = $(this);
+    var formData = new FormData(this);
     var url = "http://localhost:2000/api/category/add";
 
-    console.log(form);
+    console.log(formData);
 
     $.ajax({
       type: "POST",
       url: url,
-      data: form.serialize(),
+      data: formData,
+      processData: false,
+      contentType: false,
       success: function(data) {
         location.reload();
       },

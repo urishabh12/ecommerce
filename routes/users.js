@@ -4,6 +4,7 @@ const bcrypt = require("bcryptjs");
 const multer = require("multer");
 const _ = require("lodash");
 const { User, validate } = require("../models/users");
+const Reward = require("../models/reward");
 const mongoose = require("mongoose");
 const express = require("express");
 const router = express.Router();
@@ -68,6 +69,9 @@ router.post("/registration", cpUpload, async (req, res) => {
     .status(200)
     .header("auth-token", token)
     .send(_.pick(user, ["name", "email", "mobile"]));
+
+  const reward = new Reward({ user: user._id, count: 10 });
+  await Reward.save();
 });
 
 router.post("/login", async (req, res) => {

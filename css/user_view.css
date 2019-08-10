@@ -1,4 +1,25 @@
 .button_class {
-  background-color: #729d90;
-  color: black;
+  background-color: black;
+  color: white;
+  border: 2px solid white;
+  margin-left: 10px;
+}
+
+#vrbtn {
+  margin-top: 15px;
+  margin-left: 10px;
+}
+
+.position {
+  margin-left: 0px;
+}
+
+#name,
+#email,
+#mobile,
+#address {
+  margin-left: 10px;
+  border-bottom: 2px solid white;
+  margin-bottom: 15px;
+  width: 40%;
 }

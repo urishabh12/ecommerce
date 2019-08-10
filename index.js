@@ -11,6 +11,7 @@ const order = require("./routes/order");
 const advertisement = require("./routes/advertisement");
 const cart = require("./routes/cart");
 const wishlist = require("./routes/wishlist");
+const coupon = require("./routes/coupon");
 const db = "mongodb://localhost/ecommerce";
 const bodyParser = require("body-parser");
 const express = require("express");
@@ -33,9 +34,10 @@ app.use("/api/users", users);
 app.use("/api/category", category);
 app.use("/api/product", product);
 app.use("/api/order", order);
-app.use("/api/advert", advertisement);
+app.use("/api/advertisement", advertisement);
 app.use("/api/cart", cart);
 app.use("/api/wishlist", wishlist);
+app.use("/api/coupon", coupon);
 
 app.get("/getimage/:image", (req, res) => {
   res.contentType("image/png");
@@ -75,8 +77,8 @@ app.get("/products", (req, res) => {
   res.sendFile(__dirname + "/html/products.html");
 });
 
-app.get("/advertisement", (req, res) => {
-  res.sendFile(__dirname + "/html/advertisement.html");
+app.get("/advertise", (req, res) => {
+  res.sendFile(__dirname + "/html/advertise.html");
 });
 
 app.get("/order", (req, res) => {

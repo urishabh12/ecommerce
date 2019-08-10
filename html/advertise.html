@@ -13,10 +13,10 @@
       crossorigin="anonymous"
     />
     <link rel="stylesheet" href="http://localhost:2000/css/dashboard.css" />
-    <link rel="stylesheet" href="http://localhost:2000/css/advertisement.css" />
+    <link rel="stylesheet" href="http://localhost:2000/css/advertise.css" />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
-    <script src="http://localhost:2000/js/temp.js"></script>
+    <script src="http://localhost:2000/js/advertise.js"></script>
   </head>
   <body>
     <div class="sidenav">
@@ -28,22 +28,35 @@
       <a href="http://localhost:2000/products">
         <i class="fas fa-folder "> Products</i></a
       >
-      <a href="http://localhost:2000/advertisement">
+      <a href="http://localhost:2000/advertise">
         <i class="fas fa-industry"> Advertisement</i></a
       >
       <a href="http://localhost:2000/order">
         <i class="fas fa-list "> Order</i></a
+      >
+      <a href="http://localhost:2000/category">
+        <i class="fas fa-list-alt"> Category</i></a
+      >
+      <a href="http://localhost:2000/wishlist">
+        <i class="fas fa-heart "> Wishlist</i></a
+      >
+      <a href="http://localhost:2000/brand">
+        <i class="fas fa-camera "> Brand</i></a
+      >
+      <a href="http://localhost:2000/cart">
+        <i class="fas fa-shopping-cart "> Cart</i></a
       >
     </div>
 
     <div class="main">
       <div class="center_div">
         <h1 style="margin-bottom: 10px;">Advertisement Table</h1>
-        <table id="data" class="table table-bordered">
+        <table id="data" class="table table-borderedd table-responsive">
           <thead>
             <tr>
               <th>Title</th>
-              <th>Products</th>
+              <th>Product</th>
+              <th>Delete</th>
             </tr>
           </thead>
           <tbody></tbody>
@@ -58,29 +71,10 @@
           style="display:none;"
         >
           <div class="form-group">
-            <input type="text" name="name" id="name" placeholder="Name" />
+            <input type="text" name="title" id="title" placeholder="Title" />
           </div>
           <div class="form-group">
-            <select name="category" size="3" id="category"></select>
-          </div>
-          <div class="form-group">
-            <input
-              type="text"
-              name="company"
-              id="company"
-              placeholder="Company"
-            />
-          </div>
-          <div class="form-group">
-            <input
-              type="text"
-              name="quantity"
-              id="quantity"
-              placeholder="Quantity"
-            />
-          </div>
-          <div class="form-group">
-            <input type="text" name="price" id="price" placeholder="Price" />
+            <select name="product" multiple size="4" id="category"></select>
           </div>
           <div class="form-group">
             <input type="file" name="image" id="image" accept="image/*" />
