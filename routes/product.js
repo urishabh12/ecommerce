@@ -69,6 +69,13 @@ router.get("/all", async (req, res) => {
   return res.status(500).send({ message: "access denied" });
 });
 
+router.get("/alll", async (req, res) => {
+  let result = await Product.find({ isDelete: false });
+
+  if (!result.length) return res.status(404).send("No products to show");
+  return res.status(200).send(result);
+});
+
 router.post("/delete/:id", async (req, res) => {
   const id = req.params.id;
   const updateObj = { isDelete: true };
