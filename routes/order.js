@@ -4,13 +4,14 @@ const _ = require("lodash");
 const Order = require("../models/order");
 const { Product, productSchema } = require("../models/product");
 const Cart = require("../models/cart");
+const Reward = require("../models/reward");
 const validateJwt = require("../middleware/check");
 const mongoose = require("mongoose");
 const express = require("express");
 const router = express.Router();
 var ObjectId = require("mongoose").Types.ObjectId;
 
-async function adding(product, id) {
+async function adding(product, id, ord) {
   for (var i = 0; i < product.orderList.length; i++) {
     let temp = product.orderList[i];
 
@@ -18,16 +19,37 @@ async function adding(product, id) {
       doc.quantity = doc.quantity - temp.quantity;
       doc.save();
     });
-
-    await Cart.update(
-      { user: id },
-      { $pullAll: { products: temp._id } },
-      (err, doc) => {
-        if (err) return res.status(500).send(err);
-        res.send(model);
-      }
-    );
   }
+
+  Cart.updateOne({ user: id }, { $set: { products: [] } }, (err, doc) => {
+    if (err) return res.status(500).send(err);
+  });
+
+  Reward.updateOne(
+    { user: id },
+    { $inc: { count: -product.rewardPointDiscount } },
+    (err, doc) => {
+      console.log(doc);
+    }
+  );
+
+  let rew = Math.floor((product.totalPrice * 10) / 100);
+
+  Reward.updateOne({ user: id }, { $inc: { count: rew } }, (err, doc) => {
+    console.log(doc);
+  });
+
+  Reward.updateOne(
+    { user: 1 },
+    {
+      $push: {
+        history: { order: ord, used: product.rewardPointDiscount, gained: rew }
+      }
+    },
+    (err, doc) => {
+      console.log(doc);
+    }
+  );
 }
 
 router.post("/add", async (req, res) => {
@@ -41,7 +63,7 @@ router.post("/add", async (req, res) => {
   await order.save();
 
   res.status(200).send(order);
-  adding(req.body.product, id);
+  adding(req.body.product, id, order._id);
 });
 
 router.get("/", async (req, res) => {

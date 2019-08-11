@@ -6,7 +6,8 @@ const mongoose = require("mongoose");
 const express = require("express");
 const router = express.Router();
 
-router.get("/get/:id", async (req, res) => {
+router.get("/get", async (req, res) => {
+  const id = jwt.decode(req.get("auth-token"), config.get("jwtPrivateKey"));
   const result = await Reward.find({ user: req.params.id });
 
   if (!result.length) return res.status(400).send("Not a user");

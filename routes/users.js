@@ -71,7 +71,7 @@ router.post("/registration", cpUpload, async (req, res) => {
     .send(_.pick(user, ["name", "email", "mobile"]));
 
   const reward = new Reward({ user: user._id, count: 10 });
-  await Reward.save();
+  await reward.save();
 });
 
 router.post("/login", async (req, res) => {
