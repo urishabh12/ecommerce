@@ -1,7 +1,7 @@
 $(".my-form").on("submit", function() {
   event.preventDefault();
   $.ajax({
-    url: "http://localhost:2000/api/users/login",
+    url: "http://139.59.14.141:2000/api/users/login",
     type: "post",
     data: {
       email: $("#email").val(),
@@ -11,7 +11,7 @@ $(".my-form").on("submit", function() {
     success: function(data, textStatus, request) {
       let id = request.getResponseHeader("auth-token");
       localStorage.setItem("auth-token", id);
-      location.href = "http://localhost:2000/dashboard";
+      location.href = "http://139.59.14.141:2000/dashboard";
     },
     error: function(jqXHR, textStatus, errorThrown) {
       $("h4").text("Wrong email or password");
@@ -22,7 +22,7 @@ $(".my-form").on("submit", function() {
 
 if (localStorage.getItem("auth-token") !== null) {
   $.ajax({
-    url: "http://localhost:2000/check",
+    url: "http://139.59.14.141:2000/check",
     type: "post",
     data: {},
     headers: {
@@ -31,7 +31,7 @@ if (localStorage.getItem("auth-token") !== null) {
     dataType: "text",
     success: function(data) {
       if (data === "SUCCESS") {
-        location.href = "http://localhost:2000/dashboard";
+        location.href = "http://139.59.14.141:2000/dashboard";
       }
     },
     error: function(jqXHR, textStatus, errorThrown) {

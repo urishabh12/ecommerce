@@ -39,13 +39,13 @@ router.get("/get", async (req, res) => {
 
   let result = await Cart.find({ user: id });
 
-  return res.send(200).send(result.products);
+  return res.status(200).send(result.products);
 });
 
 router.get("/all", async (req, res) => {
   let result = await Cart.find({});
 
-  return res.send(200).send(result);
+  return res.status(200).send(result);
 });
 
 module.exports = router;

@@ -15,7 +15,7 @@ var Storage = multer.diskStorage({
   },
 
   filename: function(req, file, callback) {
-    callback(null, req.body.name);
+    callback(null, req.body.name.replace(" ", "_"));
   }
 });
 
@@ -25,7 +25,7 @@ var upload = multer({
 
 router.post("/add", upload.single("image", 1), async (req, res) => {
   const category = new Category(_.pick(req.body, ["name", "description"]));
-  category.image = req.body.name;
+  category.image = req.body.name.replace(" ", "_");
   await category.save();
 
   res.status(200).send({ message: "Saved" });

@@ -24,12 +24,19 @@ $(document).ready(function() {
       tr.append("<td>" + json[i].price + "</td>");
       tr.append("<td>" + json[i].quantity + "</td>");
       tr.append("<td onclick=" + link + ">" + "View" + "</td>");
+      tr.append(
+        "<td>" +
+          "<button class='delButton' name=" +
+          json[i]._id +
+          ">X</button>" +
+          "</td>"
+      );
       $("table tbody").append(tr);
     }
     let cat = json[json.length - 1];
     for (var i = 0; i < cat.length; i++) {
       $("#category").append(
-        "<option value='" + cat.name + "'" + ">" + cat[i].name + "</option>"
+        "<option value='" + cat[i].name + "'" + ">" + cat[i].name + "</option>"
       );
     }
     $("#data").after('<div id="nav"></div>');
@@ -58,6 +65,24 @@ $(document).ready(function() {
         .css("display", "table-row")
         .animate({ opacity: 1 }, 300);
     });
+
+    $(".delButton").click(function(e) {
+      e.preventDefault();
+
+      let id = $(this).attr("name");
+
+      $.ajax({
+        type: "POST",
+        url: "http://localhost:2000/api/product/delete/" + id,
+        data: {},
+        success: function(data) {
+          location.reload();
+        },
+        error: function(jqXHR, textStatus, errorThrown) {
+          console.log(jqXHR, textStatus, errorThrown);
+        }
+      });
+    });
   });
 
   $("#displayForm").click(function(e) {
@@ -69,15 +94,15 @@ $(document).ready(function() {
   $("#productForm").submit(function(e) {
     e.preventDefault();
 
-    var form = $(this);
+    var formData = new FormData(this);
     var url = "http://localhost:2000/api/product/add";
-
-    console.log(form);
 
     $.ajax({
       type: "POST",
       url: url,
-      data: form.serialize(),
+      data: formData,
+      processData: false,
+      contentType: false,
       success: function(data) {
         $("h5").text(data);
         location.reload();

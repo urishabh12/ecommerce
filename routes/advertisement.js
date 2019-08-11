@@ -14,7 +14,7 @@ var Storage = multer.diskStorage({
   },
 
   filename: function(req, file, callback) {
-    callback(null, req.body.title);
+    callback(null, req.body.titlereq.replace(" ", "_"));
   }
 });
 
@@ -37,7 +37,7 @@ router.post("/add", upload.single("image", 1), async (req, res) => {
   }
 
   const advertisement = new Advertisement(_.pick(req.body, ["title"]));
-  advertisement.image = req.body.title;
+  advertisement.image = req.body.titlereq.replace(" ", "_");
   advertisement.product = temp;
   await advertisement.save();
 

@@ -15,7 +15,7 @@ var Storage = multer.diskStorage({
   },
 
   filename: function(req, file, callback) {
-    callback(null, req.body.name);
+    callback(null, req.body.name.replace(" ", "_"));
   }
 });
 
@@ -24,12 +24,12 @@ var upload = multer({
 });
 
 router.post("/add", upload.single("image", 1), async (req, res) => {
-  console.log(req.data);
+  console.log(req.body);
   if (await validateJwt(req.get("auth-token"))) {
     const product = new Product(
       _.pick(req.body, ["name", "category", "company", "quantity", "price"])
     );
-    product.image = req.body.name;
+    product.image = req.body.name.replace(" ", "_");
     await product.save();
 
     return res.status(200).send("Added");
@@ -67,6 +67,16 @@ router.get("/all", async (req, res) => {
   }
 
   return res.status(500).send({ message: "access denied" });
+});
+
+router.post("/delete/:id", async (req, res) => {
+  const id = req.params.id;
+  const updateObj = { isDelete: true };
+
+  Product.findByIdAndUpdate(id, updateObj, { new: true }, function(err, model) {
+    if (err) return res.status(500).send(err);
+    res.send(model);
+  });
 });
 
 module.exports = router;

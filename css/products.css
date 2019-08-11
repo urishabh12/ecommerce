@@ -8,6 +8,11 @@
   color: black;
 }
 
+.delButton {
+  color: white;
+  background-color: black;
+}
+
 input,
 select,
 textarea {

@@ -5,7 +5,7 @@ $(document).ready(function() {
     }
   });
 
-  $.getJSON("http://localhost:2000/api/category/brand", function(json) {
+  $.getJSON("http://139.59.14.141:2000/api/category/brand", function(json) {
     var tr;
     for (var i = 0; i < json.length - 1; i++) {
       tr = $("<tr/>");
@@ -59,7 +59,7 @@ $(document).ready(function() {
 
       $.ajax({
         type: "POST",
-        url: "http://localhost:2000/api/category/delbrand/" + id,
+        url: "http://139.59.14.141:2000/api/category/delbrand/" + id,
         data: {},
         success: function(data) {
           location.reload();
@@ -81,7 +81,7 @@ $(document).ready(function() {
     e.preventDefault();
 
     var form = $(this);
-    var url = "http://localhost:2000/api/category/brand/add";
+    var url = "http://139.59.14.141:2000/api/category/brand/add";
 
     console.log(form);
 

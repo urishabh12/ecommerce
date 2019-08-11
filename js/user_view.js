@@ -17,8 +17,9 @@ $(document).ready(function() {
 
   function setit(data) {
     console.log(data);
-    let link = "http://localhost:2000/getimage/";
-    var verifylink = "http://localhost:2000/api/users/verify/" + data[0]._id;
+    let link = "http://139.59.14.141:2000/getimage/";
+    var verifylink =
+      "http://139.59.14.141:2000/api/users/verify/" + data[0]._id;
     $("#email").append("<h4>" + "<b>Email: </b>" + data[0].email + "</h4>");
     $("#name").append("<h4>" + "<b>Name: </b>" + data[0].name + "</h4>");
     $("#mobile").append("<h4>" + "<b>Mobile: </b>" + data[0].mobile + "</h4>");

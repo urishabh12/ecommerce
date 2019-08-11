@@ -17,11 +17,30 @@ $(document).ready(function() {
         "," +
         "'_self'" +
         ")";
+
+      let name = "";
+      let quantity = "";
+      let from = "";
+      let to = "";
       tr.append("<td onclick=" + link + ">" + json[i].user + "</td>");
-      tr.append("<td>" + json[i].product.name + "</td>");
-      tr.append("<td>" + json[i].product.quantity + "</td>");
-      tr.append("<td>" + json[i].product.days + "</td>");
-      tr.append("<td>" + json[i].time + "</td>");
+      for (var i = 0; i < product.orderList.length; i++) {
+        if (i === 1) {
+          name = name + product.orderList[i].name;
+          quantity = quantity + product.orderList[i].quantity;
+          from = from + product.orderList[i].ddate;
+          to = to + product.orderList[i].bdate;
+        } else {
+          name = name + ", " + product.orderList[i].name;
+          quantity = quantity + ", " + product.orderList[i].quantity;
+          from = from + ", " + product.orderList[i].ddate;
+          to = to + ", " + product.orderList[i].bdate;
+        }
+      }
+      tr.append("<td>" + name + "</td>");
+      tr.append("<td>" + quantity + "</td>");
+      tr.append("<td>" + from + "</td>");
+      tr.append("<td>" + to + "</td>");
+      tr.append("<td>" + json[i].product.totalPrice + "</td>");
       if (json[i].isComplete === true) {
         tr.append("<td>" + "Completed" + "</td>");
       } else {

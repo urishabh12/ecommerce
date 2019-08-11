@@ -5,14 +5,14 @@ $(document).ready(function() {
     }
   });
 
-  $.getJSON("http://localhost:2000/api/cart/all", function(json) {
+  $.getJSON("http://139.59.14.141:2000/api/cart/all", function(json) {
     var tr;
     var products = "";
     for (var i = 0; i < json.length; i++) {
       tr = $("<tr/>");
       let link =
         "window.open('" +
-        "http://localhost:2000/api/users/single/" +
+        "http://139.59.14.141:2000/api/users/single/" +
         json[i].user +
         "'" +
         "," +

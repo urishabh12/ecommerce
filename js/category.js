@@ -5,7 +5,7 @@ $(document).ready(function() {
     }
   });
 
-  $.getJSON("http://localhost:2000/api/category/", function(json) {
+  $.getJSON("http://139.59.14.141:2000/api/category/", function(json) {
     var tr;
     for (var i = 0; i < json.length; i++) {
       tr = $("<tr/>");
@@ -54,7 +54,7 @@ $(document).ready(function() {
 
       $.ajax({
         type: "POST",
-        url: "http://localhost:2000/api/category/delete/" + id,
+        url: "http://139.59.14.141:2000/api/category/delete/" + id,
         data: {},
         success: function(data) {
           location.reload();
@@ -76,7 +76,7 @@ $(document).ready(function() {
     e.preventDefault();
 
     var formData = new FormData(this);
-    var url = "http://localhost:2000/api/category/add";
+    var url = "http://139.59.14.141:2000/api/category/add";
 
     console.log(formData);
 

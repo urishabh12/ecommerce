@@ -5,7 +5,7 @@ $(document).ready(function() {
     }
   });
 
-  $.getJSON("http://localhost:2000/api/advertisement/web", function(json) {
+  $.getJSON("http://139.59.14.141:2000/api/advertisement/web", function(json) {
     var tr;
     for (var i = 0; i < json.length - 1; i++) {
       tr = $("<tr/>");
@@ -74,7 +74,7 @@ $(document).ready(function() {
 
       $.ajax({
         type: "POST",
-        url: "http://localhost:2000/api/advertisement/delete/" + id,
+        url: "http://139.59.14.141:2000/api/advertisement/delete/" + id,
         data: {},
         success: function(data) {
           location.reload();
@@ -96,7 +96,7 @@ $(document).ready(function() {
     e.preventDefault();
 
     var formData = new FormData(this);
-    var url = "http://localhost:2000/api/advertisement/add";
+    var url = "http://139.59.14.141:2000/api/advertisement/add";
 
     console.log(formData);
 
